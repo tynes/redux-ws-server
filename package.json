@@ -1,16 +1,30 @@
 {
   "name": "redux-ws-server",
   "version": "0.0.1",
-  "description": "http server connected to websockets to dispatch actions",
-  "main": "lib/index.js",
+  "description": "http server connected to websockets to dispatch redux actions",
+  "main": "dist/index.js",
   "bin": "./lib/redux-ws-server.js",
   "scripts": {
     "build:dev": "export NODE_ENV=development && webpack",
     "build:production": "export NODE_ENV=production && webpack",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "export NODE_ENV=development && webpack -w",
+    "prepack": "npm run build:production"
   },
   "author": "tynes",
   "license": "MIT",
+  "keywords": [
+    "nodejs",
+    "automation",
+    "curl",
+    "http",
+    "websockets",
+    "redux"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tynes/redux-ws-server.git"
+  },
   "dependencies": {
     "bsock": "^0.1.2"
   },
