@@ -1,0 +1,23 @@
+{
+  "name": "redux-ws-server",
+  "version": "0.0.1",
+  "description": "http server connected to websockets to dispatch actions",
+  "main": "lib/index.js",
+  "bin": "./lib/redux-ws-server.js",
+  "scripts": {
+    "build:dev": "export NODE_ENV=development && webpack",
+    "build:production": "export NODE_ENV=production && webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "tynes",
+  "license": "MIT",
+  "dependencies": {
+    "bsock": "^0.1.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "uglifyjs-webpack-plugin": "^1.2.7",
+    "webpack": "^3.8.1"
+  }
+}
