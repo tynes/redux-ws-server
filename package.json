@@ -1,9 +1,9 @@
 {
-  "name": "redux-ws-server",
-  "version": "0.0.1",
+  "name": "@tynes/redux-ws-server",
+  "version": "0.0.2",
   "description": "http server connected to websockets to dispatch redux actions",
   "main": "dist/index.js",
-  "bin": "./lib/redux-ws-server",
+  "bin": "./src/redux-ws-server",
   "scripts": {
     "build:dev": "export NODE_ENV=development && webpack",
     "build:production": "export NODE_ENV=production && webpack",
