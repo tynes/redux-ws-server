@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /*
  * redux-socket-server.js backend
  * Copyright (c) 2018, Mark Tyneway <mark.tyneway@gmail.com> (MIT License)
