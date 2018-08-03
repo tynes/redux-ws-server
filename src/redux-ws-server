@@ -31,6 +31,7 @@ const BASIC_AUTH_USER = process.env.REDUX_WS_SERVER_BASIC_AUTH_USER || 'default'
 const BASIC_AUTH_PASSWORD = process.env.REDUX_WS_SERVER_BASIC_AUTH_PASSWORD || 'default';
 const LOG_LEVEL = process.env.REDUX_WS_SERVER_LOG_LEVEL || 'debug';
 
+// build json responses by hand
 const messages = {
   SUCCESS: message => `{"status": "success", "message": "${message}"}`,
   ERROR: message => `{"status": "error", "message": "${message}"}`,
@@ -55,8 +56,10 @@ const httpServer = http.createServer(async (req, res) => {
       if (USE_BASIC_AUTH) {
         // handle basic auth
         // assuming format: 'Basic <base64 encoded string>'
-        const authHeader = req.headers.authorization;
+        const authHeader = req.headers.authorization || '';
         const authTokens = authHeader.split(' ');
+        // TODO: don't return different types of errors when implementing security
+        // do this until more clients besides curl are tested for basic auth
         enforce(() => authTokens[0] === 'Basic', 'Invalid Basic Auth format');
         enforce(() => authTokens.length === 2, 'Invalid Basic Auth format');
 
@@ -78,7 +81,6 @@ const httpServer = http.createServer(async (req, res) => {
       return res.end(messages.ERROR('bad authorization'));
     }
 
-
     // parse POST requests
     if (req.method === 'POST') {
       // assert socket connection has been established
@@ -95,8 +97,9 @@ const httpServer = http.createServer(async (req, res) => {
 
       req.on('end', async () => {
         let data;
+        let contentType = req.headers['content-type'] || '';
         // normalize content-type header
-        const contentType = req.headers['content-type'].toLowerCase();
+        contentType = contentType.toLowerCase();
         if (contentType === 'application/json')
           data = JSON.parse(body);
         else
@@ -128,7 +131,7 @@ const httpServer = http.createServer(async (req, res) => {
       if (handle)
         msg = `socket listening on port ${PORT}`;
       else
-        msg = 'socket not connected'
+        msg = 'socket not connected';
       return res.end(messages.SUCCESS(msg));
     } else {
       // unsupported request method
