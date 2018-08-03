@@ -1,6 +1,6 @@
 {
   "name": "@tynes/redux-ws-server",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "http server connected to websockets to dispatch redux actions",
   "main": "dist/index.js",
   "bin": "./src/redux-ws-server",
